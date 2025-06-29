@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SearchCity from './SearchCity'
 import './CurrentWeatherDetails.css'
 import Loader from './Loader'
+import { motion } from 'framer-motion'
 
 function CurrentWeatherDetails() {
   const apikey = import.meta.env.VITE_WEATHER_API_KEY
@@ -46,11 +47,19 @@ function CurrentWeatherDetails() {
         ) : isLoading ? (
           <Loader />
         ) : weather ? (
-          <div className='weather-container'>
-            <div className='weather-details'>
+          <motion.div className='weather-container'
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div className='weather-details'
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <div className="icon-temp">
                 <img src={`https:${weather.current.condition.icon}`} alt="Weather Icon" />
-                <h1>{weather.current.temp_c}°C</h1>
+                <h1 style={{ color: '#ffffff' }}>{weather.current.temp_c}°C</h1>
                 <div className="extra-weather-details">
                   <p>UV Index: {weather.current.uv}</p>
                   <p>Humidity: {weather.current.humidity}</p>
@@ -62,15 +71,28 @@ function CurrentWeatherDetails() {
                 <p>{weather.current.condition.text}</p>
                 <h4>{weather.location.name}, {weather.location.region}, {weather.location.country}</h4>
               </div>
-            </div>
+            </motion.div>
 
             {forecast && (
-              <div className='forecast-section'>
+              <motion.div className='forecast-section'
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: { transition: { staggerChildren: 0.1 } }
+                }}
+              >
                 <div className="forecast-cards">
                   {forecast.forecastday.map(day => {
                     const dayName = new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })
                     return (
-                      <div key={day.date} className='forecast-card'>
+                      <motion.div key={day.date} 
+                      className='forecast-card'
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: { opacity: 1, y: 0 }
+                        }}
+                        transition={{ duration: 0.4 }}
+                      >
                         <p style={{ fontWeight: 'bold' }}>{dayName}</p>
                         <div className="icon-temp-forecast">
                           <img src={`http:${day.day.condition.icon}`} alt="" />
@@ -80,13 +102,13 @@ function CurrentWeatherDetails() {
                           <p>{day.day.maxtemp_c}°</p>
                           <p style={{ color: 'lightgray' }}>{day.day.mintemp_c}°</p>
                         </div>
-                      </div>
+                      </motion.div>
                     )
                   })}
                 </div>
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
         ) : (
           <p>No details available</p>
         )

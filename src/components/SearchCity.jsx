@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 function SearchCity({ getWeather, setIsLoading, getError }) {
     const apikey = import.meta.env.VITE_WEATHER_API_KEY
@@ -42,9 +43,16 @@ function SearchCity({ getWeather, setIsLoading, getError }) {
         <div style={{
             margin: '20px'
         }}>
-            <input type="text" placeholder='Search your city'
+            <motion.input
+                type="text"
+                placeholder='Search your city'
                 value={currentSearchValue}
-                onChange={e => setCurrentSearchValue(e.target.value)} onKeyDown={handleKeyPress} />
+                onChange={e => setCurrentSearchValue(e.target.value)}
+                onKeyDown={handleKeyPress}
+                whileFocus={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+            />
         </div>
     )
 }
