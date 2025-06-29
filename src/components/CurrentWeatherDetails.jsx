@@ -11,8 +11,8 @@ function CurrentWeatherDetails() {
   const getWeatherDetails = (weatherReceived) => {
     setWeather(weatherReceived)
     setDay(new Date(weatherReceived.location.localtime).toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'}))
-    console.log(weatherReceived.location.localtime)
-    console.log(weatherReceived)
+    // console.log(weatherReceived.location.localtime)
+    // console.log(weatherReceived)
   }
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function CurrentWeatherDetails() {
       fetch(`${baseURL}/v1/forecast.json?key=${apikey}&q=${weather.location.name}&days=7`)
         .then(res => res.json())
         .then(data => {
-          console.log(data.forecast)
+          // console.log(data.forecast)
           setForecast(data.forecast)
         })
         .catch(err => console.log(err))
@@ -64,7 +64,7 @@ function CurrentWeatherDetails() {
                 const dayName = new Date(day.date).toLocaleDateString('en-US',{weekday:'long'})
                 return (
                   <div key={day.date} className='forecast-card' >
-                    <p>{dayName}</p>
+                    <p style={{fontWeight:'bold'}}>{dayName}</p>
                     <div className="icon-temp-forecast">
                       <img src={`http:${day.day.condition.icon}`} alt="" />
                       <p>{day.day.condition.text}</p>

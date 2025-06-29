@@ -28,15 +28,10 @@
     width: 80px;
 }
 .weather-details p{
-    /* position: absolute; */
-    /* top: 60px; */
     text-align: center;
-    /* left: 130px; */
     margin: 0;
 }
 .weather-details h4{
-    /* position: absolute; */
-    /* left: 70px; */
     text-align: center;
     margin: 0;
     
@@ -53,8 +48,6 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    /* margin: 15px; */
-    /* border: 1px solid black; */
     flex-wrap: wrap;
 }
 .forecast-card{

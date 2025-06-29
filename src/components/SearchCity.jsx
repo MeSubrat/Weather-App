@@ -4,10 +4,9 @@ function SearchCity({ getWeather }) {
     const apikey = import.meta.env.VITE_WEATHER_API_KEY
     const baseURL = import.meta.env.VITE_BASE_URL
     const [currentSearchValue, setCurrentSearchValue] = useState('')
-    // const [weather, setWeather] = useState('')
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            console.log(currentSearchValue)
+            // console.log(currentSearchValue)
             handleFetch(currentSearchValue)
             handleFetchForecast(currentSearchValue)
             setCurrentSearchValue('')
@@ -16,7 +15,6 @@ function SearchCity({ getWeather }) {
     const handleFetch = (city) => {
         fetch(`${baseURL}/v1/current.json?key=${apikey}&q=${city}`)
             .then(res => res.json())
-            // .then(data => setWeather(data))
             .then(data => getWeather(data))
             .catch(Error => console.log(Error))
     }
