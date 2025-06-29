@@ -1,0 +1,29 @@
+.container{
+    background-color: #1ebd9d;
+    height: 500px;
+    width: 700px;
+    border-radius: 5px;
+    padding: 15px;
+}
+.left-container{
+    height: 100%;
+    width: 250px;
+    /* background-color: #19a88a; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    /* gap: 25px; */
+}
+.container input[type="text"]
+{
+    height: 30px;
+    width: 390px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+}
