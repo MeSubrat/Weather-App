@@ -1,28 +1,24 @@
 import React, { useState } from 'react'
 
-function SearchCity({ getWeather }) {
+function SearchCity({ getWeather, setIsLoading}) {
     const apikey = import.meta.env.VITE_WEATHER_API_KEY
     const baseURL = import.meta.env.VITE_BASE_URL
     const [currentSearchValue, setCurrentSearchValue] = useState('')
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            // console.log(currentSearchValue)
             handleFetch(currentSearchValue)
-            handleFetchForecast(currentSearchValue)
             setCurrentSearchValue('')
         }
     }
     const handleFetch = (city) => {
+        setIsLoading(true)
         fetch(`${baseURL}/v1/current.json?key=${apikey}&q=${city}`)
             .then(res => res.json())
-            .then(data => getWeather(data))
+            .then(data => {
+                getWeather(data)
+                setIsLoading(false)
+            })
             .catch(Error => console.log(Error))
-    }
-    const handleFetchForecast=(city)=>{
-        fetch(`${baseURL}/v1/forecast.json?key=${apikey}&q=${city}&days=7`)
-            .then(res => res.json())
-            .then(data=>localStorage.setItem('forecast',JSON.stringify(data)))
-            .catch(err=>console.log(err))
     }
     return (
 
