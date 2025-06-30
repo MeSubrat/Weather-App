@@ -91,12 +91,10 @@
     min-height: 150px;
     margin: 7px;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
 .forecast-card:hover {
-    transform: scale(1.05);
-    background-color: rgba(135, 121, 121, 0.176);
+    background-color: rgba(160, 146, 146, 0.176);
 }
 
 .forecast-card p {
